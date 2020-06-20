@@ -1,0 +1,79 @@
+Q-01: How to image/file upload in laravel 7?
+
+------  Answer  ------
+
+Step-01: <form> field up enctype attribute-
+         <form action="{{ route('image.upload') }}" method="POST" enctype="multipart/form-data">
+Step-02: Hold image/file-
+         $image = $request->file('name'); 
+Step-03: Make image name with real extensions-
+         $imagename = time().'.'.$request->image->getClientOriginalExtension();
+Step-04: Now upload image/file-
+         $request->image->move(public_path('frontend/image'), $imageName); 
+Step-05: Done and enjoy.
+
+
+
+
+------- Simple Full Code ------
+
+ $image = $request->file('image');
+ $imageName = time().'.'.$request->image->getClientOriginalExtension();  
+ $request->image->move(public_path('frontend/image'), $imageName);
+ 
+ 
+ 
+ 
+ ------ Image Validations ------
+ 
+ $request->validate([
+    'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
+ ]);
+ 
+ 
+ ------ Full Real Example -----
+ 
+ 
+ public function imageUpload(Request $request){
+        $data = array();
+        $data['title'] = $request->title;
+        $data['category_id'] = $request->category_id;
+        $data['details'] = $request->details;
+        $image = $request->file('image');
+        if($image){
+            $imageName = time().'.'.$request->image->getClientOriginalExtension();  
+            $request->image->move(public_path('frontend/image'), $imageName);
+            $data['image'] = $imageName;
+            $insert = DB::table('posts')->insert($data);
+            if($insert){
+                $notification=array(
+                    'messege'=>'Successfully Category Update!',
+                    'alert-type'=>'success'
+                );
+                return Redirect()->back()->with($notification);
+            }else{
+               
+                $notification=array(
+                    'messege'=>'Nothing to update!',
+                    'alert-type'=>'warning'
+                );
+                return Redirect()->back()->with($notification);
+            }
+        }else{
+            $insert = DB::table('posts')->insert($data);
+            if($insert){
+                $notification=array(
+                    'messege'=>'Successfully Category Update!',
+                    'alert-type'=>'success'
+                );
+                return Redirect()->back()->with($notification);
+            }else{
+               
+                $notification=array(
+                    'messege'=>'Nothing to update!',
+                    'alert-type'=>'warning'
+                );
+                return Redirect()->back()->with($notification);
+            }
+        }
+    }
