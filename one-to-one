@@ -1,0 +1,26 @@
+Q-01: Eloquent(one-to-one) Relatiosn
+
+      $data = DB::table('primary_table')
+              ->join('join_table', 'primary_table.primary_key', 'join_table.forigen_key')
+              ->select('primary_table.*','join_table.spcify')
+              ->get();
+
+
+
+--------- Full Example ------
+
+$post = DB::table('posts')
+        ->join('categories', 'posts.category_id', 'categories.id')
+        ->select('posts.*', 'categories.name')
+        ->get();
+        
+        
+        
+        
+-------- Note --------
+1. primary_table: Main table name.
+2. join_table: Join table name.
+3. primary_key: Primary table has same id from join table id.
+4. forigen_key: Primary key = Forigen Key
+5. * : Select All
+6. spcify : Specific column select..
