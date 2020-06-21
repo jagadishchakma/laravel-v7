@@ -1,0 +1,10 @@
+Q-01: How to delete upload image in laravel 7?
+      unlink(image_path);
+      
+----- Full Code ------
+unlink('frontend/image/demo.png');
+
+
+----- Real Code -----
+unlink('frontend/image/'.$row->image);
+      
