@@ -27,3 +27,17 @@ $data->save();
 
 
 $data = Student::all();
+
+
+
+----- Update ------
+
+$data  = Student::findorfail($id);
+
+$data->name = $request->name;
+$data->email = $request->email;
+$data->phone = $request->phone;
+$data->save();
+
+
+Step-03: Done and enjoy
