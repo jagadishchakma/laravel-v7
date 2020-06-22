@@ -1,0 +1,29 @@
+Q-01: How to create a pagination in Laravel project?
+----------------------------------------------------
+
+Step-01: Database query paginate-
+          
+          
+        ---- Numbering Paginate ----- 
+        $post = DB::table('posts')
+                ->paginate(3)
+                ->get();
+         
+         
+        ------- Previous/Next Paginate -----
+         $post = DB::table('posts')
+                 ->simplePaginate(3)
+                 ->get();
+                 
+                 
+Step-02: Display Pagination-
+        $post->links()
+        
+        
+Step-03: Done and enjoy.
+
+
+
+
+
+
