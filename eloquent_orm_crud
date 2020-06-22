@@ -1,0 +1,29 @@
+Q-1: How to operate Eloquent_Orm_Crud in laravel 7?
+--------------------------------------------------
+
+
+Step-01: Create Model & Migration in same name and uppercase letter. Just Migration file last add 's' for identify modal and table name.
+
+
+       Migration: php artisan make:migration create_student_table --create=Students
+       Model: php artisan make:model Student
+       
+       
+       
+Step-02: CRUD Operation Start-
+
+use App\Student;
+------- Create --------
+
+
+$data = new Stduent();
+$data->name = $request->name;
+$data->email = $request->email;
+$data->phone = $request->phone;
+$data->save();
+
+
+------- Read --------
+
+
+$data = Student::all();
