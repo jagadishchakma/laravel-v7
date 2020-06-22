@@ -1,0 +1,38 @@
+Q-01: How to operate Query Bulider CRUD in laravel?
+---------------------------------------------------
+
+
+Step-01: Use Database-
+         use DB;
+Step-01: CRUD Operation Set Up-
+
+
+  ---- Creat -------
+  
+  $insert = DB::table('table_name')
+            ->insert('$data');
+            
+ ----- Read ------
+ 
+ $read = DB::table('table_name')
+         ->get(); // All Data
+ $read = DB::table('table_name')
+         ->where('id', $id)
+         ->first(); // Specific
+
+
+------ Update -------
+
+$update = DB::table('table_name')
+          ->where('id',$id)
+          ->update($data); // Specific
+          
+          
+ ------ Delete -------
+ 
+ 
+ $delete = DB::table('table_name')
+           ->where('id', $id)
+           ->delete(); // Specific
+           
+Step-03: Done and enoy           
