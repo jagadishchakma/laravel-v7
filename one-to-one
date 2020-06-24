@@ -1,4 +1,4 @@
-Q-01: Eloquent(one-to-one) Relatiosn
+Q-01: Query Builder (one-to-one) Relatiosn
 
       $data = DB::table('primary_table')
               ->join('join_table', 'primary_table.primary_key', 'join_table.forigen_key')
@@ -24,3 +24,61 @@ $post = DB::table('posts')
 4. forigen_key: Primary key = Forigen Key
 5. * : Select All
 6. spcify : Specific column select..
+
+
+
+
+------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+Q-02: Eloquent ORM (one-to-one) Relations-
+
+------ Based Primary Table- -------
+
+Standard Way:     hasOne('forigen_table_model_path');
+                  hasOne('App\User');
+                  ----- How it relate? ------
+                  Relate is: primary table(id) and forigen table(primaryTableName_id) matches. Otherwise it's not workiong.
+                  ---------------------------
+                  Primary_table_name: users
+                  Primary_table_key: id
+                  Forigen_table_key_will_be: user_id(Otherwise not working)
+                  
+Custom Way-01: hasOne('forigen_table_model_path','forigen_key');
+               hasOne('App\User','u_id');
+               ------- How it relate? ------
+               Relate is: primary table(id) and forigen table(u_id/custom) mathces.. You always changable forigen_key .. But must matches value with primary table(id).
+
+
+Custom-02: hasOne('forigen_table_model_path','forigen_key','local_key');
+           hasOne('App\User','u_reg','reg');
+           ------ How it relate? ------
+           Relate is: primary table(reg/custom) and forigen table(u_reg/custom) matches. You always changable primary key and forigen key. But must be matches value with both
+
+
+
+
+-------------- Based Forigen Table(Invarse) ----------------
+
+Standard Way:     belongsTo('primary_table_model_path');
+                  belongsTo('App\phone');
+                  ----- How it relate? ------
+                  Relate is: primary table(id) and forigen table(primaryTableName_id) matches. Otherwise it's not workiong.
+                  ---------------------------
+                  Primary_table_name: users
+                  Primary_table_key: id
+                  Forigen_table_key_will_be: user_id(Otherwise not working)
+                  
+Custom Way-01: belongsTo('primary_table_model_path','forigen_key');
+               belongsTo('App\phone','reg/custom');
+               ------- How it relate? ------
+               Relate is: primary table(id) and forigen table(u_id/custom) mathces.. You always changable forigen_key .. But must matches value with primary table(id).
+
+
+Custom-02: belongsTo('forigen_table_model_path','forigen_key','local_key');
+           belongsTo('App\User','u_reg','reg');
+           ------ How it relate? ------
+           Relate is: primary table(reg/custom) and forigen table(u_reg/custom) matches. You always changable primary key and forigen key. But must be matches value with both
+
+
+                    
+                  
+                
