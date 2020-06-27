@@ -1,0 +1,24 @@
+Q-01: How to create one-to-many relationship in laravel?
+-------------------------------------------------------
+-------------- Query Builder ------------------
+$data = DB::table('posts')
+        ->join('comments','posts.id','comment.post_id')
+        ->where('posts.id',$id)
+        ->get();
+        
+        
+        
+        
+        
+        
+--------------- Eloquent ORM -----------------
+
+----------- In Post Model -----------
+public function comments(){
+  return $this->hasMany('App\Comment');
+}
+--------- In Post Controller ------
+
+$data = Post::find($id);
+
+return view('post')->with('comments'->$data->comments);
